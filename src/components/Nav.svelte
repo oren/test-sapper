@@ -1,60 +1,37 @@
 <script>
 	export let segment;
+	import Icon from 'svelte-awesome/components/Icon.svelte'
+  import { cog } from 'svelte-awesome/icons';
+	import { faUtensils, faAppleAlt } from '@fortawesome/free-solid-svg-icons';
 </script>
 
 <style>
 	nav {
-		border-bottom: 1px solid rgba(255,62,0,0.1);
-		font-weight: 300;
-		padding: 0 1em;
+		position: fixed;
+		bottom: 0;
+		width: 100%;
+		z-index:1000;
+		border-top: 1px solid #edf2f7;
+		@apply bg-white;
 	}
-
-	ul {
-		margin: 0;
-		padding: 0;
-	}
-
-	/* clearfix */
-	ul::after {
-		content: '';
-		display: block;
-		clear: both;
-	}
-
-	li {
-		display: block;
-		float: left;
-	}
-
 	.selected {
-		position: relative;
-		display: inline-block;
+		@apply text-blue-500;
 	}
-
-	.selected::after {
-		position: absolute;
-		content: '';
-		width: calc(100% - 1em);
-		height: 2px;
-		background-color: rgb(255,62,0);
-		display: block;
-		bottom: -1px;
-	}
-
 	a {
-		text-decoration: none;
-		padding: 1em 0.5em;
-		display: block;
+		@apply block py-2 px-4;
 	}
 </style>
 
 <nav>
-	<ul>
-		<li><a class='{segment === undefined ? "selected" : ""}' href='.'>home</a></li>
-		<li><a class='{segment === "about" ? "selected" : ""}' href='about'>about</a></li>
-
-		<!-- for the blog link, we're using rel=prefetch so that Sapper prefetches
-		     the blog data when we hover over the link or tap it on a touchscreen -->
-		<li><a rel=prefetch class='{segment === "blog" ? "selected" : ""}' href='blog'>blog</a></li>
+	<ul class="flex">
+		<li class="flex-1 mr-2">
+			<a class="{segment === undefined || segment ==="eat" ? "selected" : ""} text-center block py-2 px-4" href="/food">Eat<Icon style="margin-left: 0.5rem; margin-bottom: 0.25rem;" data={faUtensils}/></a>
+		</li>
+		<li class="flex-1 mr-2">
+			<a class="{segment === "manage-food" ? "selected" : ""} text-center block py-2 px-4" href="manage-food">Food<Icon style="margin-left: 0.5rem; margin-bottom: 0.25rem;" data={faAppleAlt}/></a>
+		</li>
+		<li class="text-center flex-1">
+			<a class="{segment === "settings" ? "selected" : ""} text-center block py-2 px-4" href="settings">Settings<Icon style="margin-left: 0.5rem; margin-bottom: 0.25rem;" data={cog}/></a>
+		</li>
 	</ul>
 </nav>
